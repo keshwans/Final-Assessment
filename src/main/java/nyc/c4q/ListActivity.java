@@ -2,14 +2,15 @@ package nyc.c4q;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 
 public class ListActivity extends Activity {
 
     public ListView list;
+    public RosterAdapter adapter;
 
     public static final Person[] PEOPLE = {
         new Person("Hannah",    "Abbott",          House.Hufflepuff),
@@ -48,6 +49,21 @@ public class ListActivity extends Activity {
         setContentView(R.layout.activity_list);
 
         list = (ListView) findViewById(R.id.list);
+        adapter = new RosterAdapter(getApplicationContext(), 0, PEOPLE,
+                RosterAdapter.NameDisplay.LastFirst, false);
+        list.setAdapter(adapter);
+    }
+
+    public void buttonColor_onClick_handler(View v) {
+        Button button = (Button) v;
+        if (button.getText().toString() == getResources().getString(R.string.hide_color)) {
+            button.setText(R.string.show_color);
+            adapter.setColor(false);
+        }
+        else {
+            button.setText(R.string.hide_color);
+            adapter.setColor(true);
+        }
     }
 
 }

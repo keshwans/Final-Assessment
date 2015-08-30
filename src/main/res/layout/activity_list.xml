@@ -17,6 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:text="@string/last_first"
+        android:onClick="buttonName_onClick_handler"
         />
 
     <Button
@@ -26,6 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_toStartOf="@id/button_name"
         android:text="@string/show_color"
+        android:onClick="buttonColor_onClick_handler"
         />
 
     <ListView
