@@ -1,6 +1,7 @@
 package nyc.c4q;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +64,18 @@ public class ListActivity extends Activity {
         else {
             button.setText(R.string.hide_color);
             adapter.setColor(true);
+        }
+    }
+
+    public void buttonName_onClick_handler(View v) {
+        Button button = (Button) v;
+        if (button.getText().toString() == getResources().getString(R.string.first_last)) {
+            button.setText(R.string.last_first);
+            adapter.sortByLastName();
+        }
+        else {
+            button.setText(R.string.first_last);
+            adapter.sortByFirstName();
         }
     }
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Comparator;
+
 /**
  * Created by robert on 8/30/15.
  */
@@ -19,12 +21,31 @@ public class RosterAdapter extends ArrayAdapter<Person> {
     public NameDisplay nameDisplay;
     public boolean showColor;
 
+    private Comparator<Person> compFirst;
+    private Comparator<Person> compLast;
+
     public RosterAdapter(Context context, int resource, Person[] objects, NameDisplay nameDisplay,
                          boolean showColor) {
         super(context, resource, objects);
 
         this.nameDisplay = nameDisplay;
         this.showColor = showColor;
+
+        this.compFirst = new FirstNameComparator();
+        this.compLast = new LastNameComparator();
+
+        switch (nameDisplay) {
+            case FirstLast:
+                sort(compFirst);
+                break;
+
+            case LastFirst:
+                sort(compLast);
+                break;
+
+            default:
+                throw new RuntimeException("nameDisplay is invalid, " + nameDisplay);
+        }
     }
 
     @Override
@@ -57,6 +78,18 @@ public class RosterAdapter extends ArrayAdapter<Person> {
 
     public void setColor(boolean showColor) {
         this.showColor = showColor;
+        notifyDataSetChanged();
+    }
+
+    public void sortByFirstName() {
+        this.nameDisplay = NameDisplay.FirstLast;
+        sort(compFirst);
+        notifyDataSetChanged();
+    }
+
+    public void sortByLastName() {
+        this.nameDisplay = NameDisplay.LastFirst;
+        sort(compLast);
         notifyDataSetChanged();
     }
 
