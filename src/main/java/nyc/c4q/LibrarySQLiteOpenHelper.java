@@ -21,8 +21,18 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
     public static final String DATABASE_NAME = "library_orm.db";
     public static final int DATABASE_VERSION = 2;
 
-    public LibrarySQLiteOpenHelper(Context context) {
+    private static LibrarySQLiteOpenHelper mDBHelper;
+
+    protected LibrarySQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public static synchronized LibrarySQLiteOpenHelper getInstance(Context context) {
+        if (mDBHelper == null) {
+            mDBHelper = new LibrarySQLiteOpenHelper(context.getApplicationContext());
+        }
+
+        return mDBHelper;
     }
 
     @Override
@@ -46,7 +56,7 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Member.class, false);
             TableUtils.dropTable(connectionSource, Book.class, false);
 
-        }catch (java.sql.SQLException e) {
+        } catch (java.sql.SQLException e) {
             e.printStackTrace();
         }
         onCreate(database, connectionSource);
