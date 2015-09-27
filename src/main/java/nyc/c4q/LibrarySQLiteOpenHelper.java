@@ -77,7 +77,6 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM BOOKS", null);
         cursor.moveToFirst();
         int count = cursor.getInt(0);
-        db.close();
         return count > 0;
     }
 
