@@ -3,29 +3,44 @@ package nyc.c4q.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "members")
 public class Member {
 
     @SerializedName("id")
     @Expose
+    @DatabaseField(id = true)
     private Long id;
+
     @SerializedName("name")
     @Expose
+    @DatabaseField
     private String name;
+
     @SerializedName("dob_month")
     @Expose
+    @DatabaseField
     private Long dobMonth;
+
     @SerializedName("dob_day")
     @Expose
     private Long dobDay;
+
     @SerializedName("dob_year")
     @Expose
+    @DatabaseField
     private Long dobYear;
+
     @SerializedName("city")
     @Expose
+    @DatabaseField
     private String city;
+
     @SerializedName("state")
     @Expose
+    @DatabaseField
     private String state;
 
     /**

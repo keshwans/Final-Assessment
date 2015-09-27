@@ -3,53 +3,84 @@ package nyc.c4q.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "books")
 public class Book {
 
     @SerializedName("id")
     @Expose
+    @DatabaseField(id = true)
     private Long id;
+
     @SerializedName("title")
     @Expose
+    @DatabaseField
     private String title;
+
     @SerializedName("author")
     @Expose
+    @DatabaseField
     private String author;
+
     @SerializedName("isbn")
     @Expose
+    @DatabaseField
     private String isbn;
+
     @SerializedName("isbn13")
     @Expose
+    @DatabaseField
     private String isbn13;
+
     @SerializedName("publisher")
     @Expose
+    @DatabaseField
     private String publisher;
+
     @SerializedName("publishyear")
     @Expose
+    @DatabaseField
     private Long publishyear;
+
     @SerializedName("checkedout")
     @Expose
+    @DatabaseField
     private Boolean checkedout;
+
     @SerializedName("checkedoutby")
     @Expose
+    @DatabaseField
     private Long checkedoutby;
+
     @SerializedName("checkoutdateyear")
     @Expose
+    @DatabaseField
     private Long checkoutdateyear;
+
     @SerializedName("checkoutdatemonth")
     @Expose
     private Long checkoutdatemonth;
+
     @SerializedName("checkoutdateday")
     @Expose
+    @DatabaseField
     private Long checkoutdateday;
+
     @SerializedName("duedateyear")
     @Expose
+    @DatabaseField
     private Long duedateyear;
+
     @SerializedName("duedatemonth")
     @Expose
+    @DatabaseField
     private Long duedatemonth;
+
     @SerializedName("duedateday")
     @Expose
+    @DatabaseField
     private Long duedateday;
 
     /**
