@@ -1,10 +1,16 @@
 package nyc.c4q;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.sql.SQLException;
+
+import nyc.c4q.models.Book;
+import nyc.c4q.models.Member;
 
 
 public class LibraryActivity extends Activity {
@@ -49,12 +55,35 @@ public class LibraryActivity extends Activity {
         String name = inputParameter.getText().toString();
 
         // TODO Display member information for the member with the given name.
+        try {
+            Member member = dbHelper.loadMemberData(name);
+
+            String memberName = member.getName();
+            int memberId = member.getId();
+            String city = member.getCity();
+            String state = member.getState();
+            int dobDay = member.getDobDay();
+            int dobMonth = member.getDobMonth();
+            int dobYear = member.getDobYear();
+
+            String result = "id: " + String.valueOf(memberId) + "\n" +
+                    "name: " + memberName + "\n" +
+                    "dob: " + String.valueOf(dobMonth) + "/" + String.valueOf(dobDay)+ "/" + String.valueOf(dobYear)+"\n" +
+                    "location: " + city + ", " + state;
+
+            textDisplay.setText(result);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void button_getBook_onClick(View view) {
         String isbn = inputParameter.getText().toString();
 
         // TODO Display book information for the book with the given ISBN.
+        new BooksDataSeachTask().execute(isbn);
+
     }
 
     public void button_getCheckedOut_onClick(View view) {
@@ -65,4 +94,41 @@ public class LibraryActivity extends Activity {
         //      earliest due first.
     }
 
+
+    private class BooksDataSeachTask extends AsyncTask<String, Void, Book> {
+        String isbn;
+        Book book;
+        @Override
+        protected Book doInBackground(String... isbns) {
+
+
+            try {
+                book = dbHelper.loadBookData(isbns[0]);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return book;
+        }
+
+        @Override
+        protected void onPostExecute(Book book) {
+            int id = book.getId();
+            String title = book.getTitle();
+            String author =  book.getAuthor();
+            String isbn = book.getIsbn();
+            String isbn13 =  book.getIsbn13();
+            String publisher = book.getPublisher();
+            int publishyear = book.getPublishYear();
+
+            String result = "id: " + String.valueOf(id) + "\n" +
+                    "title: " + title + "\n" +
+                    "author: " + author + "\n" +
+                    "isbn: " + isbn + "\n" +
+                    "isbn13: " + isbn13 + "\n" +
+                    "publisher: " + publisher + "\n" +
+                    "publication year: " + String.valueOf(publishyear);
+            textDisplay.setText(result);
+
+        }
+    }
 }

@@ -177,5 +177,20 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
             e.printStackTrace();
         }
     }
+
+    public Member loadMemberData(String name) throws SQLException, java.sql.SQLException {
+        return getDao(Member.class)
+                .queryBuilder()
+                .where().eq("name", name)
+                .queryForFirst();
+    }
+
+    public Book loadBookData(String isbn) throws SQLException, java.sql.SQLException {
+        return getDao(Book.class)
+                .queryBuilder()
+                .where().eq("isbn", isbn)
+                .queryForFirst();
+    }
+
 }
 
