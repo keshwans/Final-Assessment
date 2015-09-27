@@ -13,9 +13,9 @@ public class LastNameComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person l, Person r) {
-        if (l.lastName != r.lastName) {
-            return l.lastName.compareTo(r.lastName);
+        if (l.lastName.equals(r.lastName)) {
+            return l.firstName.compareTo(r.firstName);
         }
-        return l.firstName.compareTo(r.firstName);
+        return l.lastName.compareTo(r.lastName);
     }
 }
