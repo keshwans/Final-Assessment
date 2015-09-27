@@ -9,6 +9,7 @@ import android.widget.EditText;
 public class LibraryActivity extends Activity {
 
     public EditText inputParameter;
+    private LibraryDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +17,11 @@ public class LibraryActivity extends Activity {
         setContentView(R.layout.activity_library);
 
         inputParameter = (EditText) findViewById(R.id.input_parameter);
+
+        dbHelper = new LibraryDatabaseHelper(getApplicationContext(), getResources(), getPackageName());
+        if (!dbHelper.hasData()) {
+            dbHelper.populateData();
+        }
     }
 
     public void checkOut(int memberId, int bookId) {
