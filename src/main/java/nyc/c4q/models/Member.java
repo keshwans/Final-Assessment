@@ -170,4 +170,17 @@ public class Member {
         this.state = state;
     }
 
+
+    public Member() {
+    }
+
+    public Member(Integer id, String name, Integer dobMonth, Integer dobDay, Integer dobYear, String city, String state) {
+        this.id = id;
+        this.name = name;
+        this.dobMonth = dobMonth;
+        this.dobDay = dobDay;
+        this.dobYear = dobYear;
+        this.city = city;
+        this.state = state;
+    }
 }
