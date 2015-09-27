@@ -33,6 +33,9 @@ public class LibraryActivity extends Activity {
         // TODO This method is called when the member with the given ID checks
         //      out the book with the given ID. Update the system accordingly.
         //      The due date for the book is two weeks from today.
+
+        dbHelper.checkOut(memberId, bookId);
+
     }
 
     public boolean checkIn(int memberId, int bookId) {

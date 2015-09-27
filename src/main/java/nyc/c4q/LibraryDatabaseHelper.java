@@ -270,4 +270,32 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    /* method called when a book is checkedout by a member
+        It updates the database
+     */
+    public void checkOut(int memberId, int bookId) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT, 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY, memberId);
+
+        Calendar calendar = Calendar.getInstance();
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR,  calendar.get(Calendar.YEAR));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH, calendar.get(Calendar.MONTH) + 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY,   calendar.get(Calendar.DATE));
+
+        calendar.add(Calendar.DATE, 14);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR,  calendar.get(Calendar.YEAR));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH, calendar.get(Calendar.MONTH) + 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY, calendar.get(Calendar.DATE));
+
+        final String where = LibraryDatabaseContract.Books._ID + "=?";
+        final String[] whereArgs = { String.valueOf(bookId) };
+
+        db.update(LibraryDatabaseContract.Books.TABLE_NAME, values, where, whereArgs);
+        db.close();
+    }
+
 }
