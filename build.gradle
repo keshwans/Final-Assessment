@@ -19,7 +19,8 @@ android {
         targetSdkVersion 22
         versionCode 2
         versionName "1.0.0-SNAPSHOT"
-        applicationId "nyc.c4q"
+        applicationId "nyc.c4q.final.native"
+//        applicationId "nyc.c4q.final.ormlite"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
