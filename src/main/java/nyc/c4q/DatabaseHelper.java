@@ -26,38 +26,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "library.db";
 
     private static final String SQL_CREATE_TABLE_MEMBERS =
-            "CREATE TABLE " + DatabaseContract.Members.TABLE_NAME + " (" +
-                    DatabaseContract.Members._ID + " INTEGER PRIMARY KEY, " +
-                    DatabaseContract.Members.COLUMN_NAME_NAME      + " TEXT, " +
-                    DatabaseContract.Members.COLUMN_NAME_DOB_MONTH + " INTEGER, " +
-                    DatabaseContract.Members.COLUMN_NAME_DOB_DAY   + " INTEGER, " +
-                    DatabaseContract.Members.COLUMN_NAME_DOB_YEAR  + " INTEGER, " +
-                    DatabaseContract.Members.COLUMN_NAME_CITY      + " TEXT, " +
-                    DatabaseContract.Members.COLUMN_NAME_STATE     + " TEXT)";
+            "CREATE TABLE " + LibraryDatabaseContract.Members.TABLE_NAME + " (" +
+                    LibraryDatabaseContract.Members._ID + " INTEGER PRIMARY KEY, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_NAME      + " TEXT, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_DOB_MONTH + " INTEGER, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_DOB_DAY   + " INTEGER, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_DOB_YEAR  + " INTEGER, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_CITY      + " TEXT, " +
+                    LibraryDatabaseContract.Members.COLUMN_NAME_STATE     + " TEXT)";
 
     private static final String SQL_CREATE_TABLE_BOOKS =
-            "CREATE TABLE " + DatabaseContract.Books.TABLE_NAME + " (" +
-                    DatabaseContract.Books._ID + " INTEGER PRIMARY KEY, " +
-                    DatabaseContract.Books.COLUMN_NAME_TITLE          + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_AUTHOR         + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_ISBN           + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_ISBN13         + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_PUBLISHER      + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR   + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT    + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY + " TEXT, " +
-                    DatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY   + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR  + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_DUE_MONTH      + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_DUE_DAY        + " INTEGER, " +
-                    DatabaseContract.Books.COLUMN_NAME_DUE_YEAR       + " INTEGER)";
+            "CREATE TABLE " + LibraryDatabaseContract.Books.TABLE_NAME + " (" +
+                    LibraryDatabaseContract.Books._ID + " INTEGER PRIMARY KEY, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_TITLE          + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_AUTHOR         + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_ISBN           + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_ISBN13         + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISHER      + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR   + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT    + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY + " TEXT, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY   + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR  + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH      + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY        + " INTEGER, " +
+                    LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR       + " INTEGER)";
 
     private static final String SQL_DROP_TABLE_MEMBERS =
-            "DROP TABLE IF EXISTS " + DatabaseContract.Members.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + LibraryDatabaseContract.Members.TABLE_NAME;
 
     private static final String SQL_DROP_TABLE_BOOKS =
-            "DROP TABLE IF EXISTS " + DatabaseContract.Books.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + LibraryDatabaseContract.Books.TABLE_NAME;
 
 
     private Resources resources;
@@ -105,15 +105,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 JSONObject member = members.getJSONObject(i);
 
                 ContentValues values = new ContentValues();
-                values.put(DatabaseContract.Members._ID,                   member.getInt("id"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_NAME,      member.getString("name"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_DOB_MONTH, member.getInt("dob_month"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_DOB_DAY,   member.getInt("dob_day"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_DOB_YEAR,  member.getInt("dob_year"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_CITY,      member.getString("city"));
-                values.put(DatabaseContract.Members.COLUMN_NAME_STATE,     member.getString("state"));
+                values.put(LibraryDatabaseContract.Members._ID,                   member.getInt("id"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_NAME,      member.getString("name"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_DOB_MONTH, member.getInt("dob_month"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_DOB_DAY,   member.getInt("dob_day"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_DOB_YEAR,  member.getInt("dob_year"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_CITY,      member.getString("city"));
+                values.put(LibraryDatabaseContract.Members.COLUMN_NAME_STATE,     member.getString("state"));
 
-                db.insert(DatabaseContract.Members.TABLE_NAME, null, values);
+                db.insert(LibraryDatabaseContract.Members.TABLE_NAME, null, values);
             }
             catch (JSONException e) {
                 Log.e("JSON EXCEPTION", e.getMessage());
@@ -129,26 +129,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 JSONObject book = books.getJSONObject(i);
 
                 ContentValues values = new ContentValues();
-                values.put(DatabaseContract.Books._ID,                      book.getInt("id"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_TITLE,        book.getString("title"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_AUTHOR,       book.getString("author"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_ISBN,         book.getString("isbn"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_ISBN13,       book.getString("isbn13"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_PUBLISHER,    book.getString("publisher"));
-                values.put(DatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR, book.getInt("publishyear"));
+                values.put(LibraryDatabaseContract.Books._ID,                      book.getInt("id"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_TITLE,        book.getString("title"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_AUTHOR,       book.getString("author"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_ISBN,         book.getString("isbn"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_ISBN13,       book.getString("isbn13"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISHER,    book.getString("publisher"));
+                values.put(LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR, book.getInt("publishyear"));
 
                 if (book.has("checkedout") && book.getBoolean("checkedout")) {
-                    values.put(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT,    book.getBoolean("checkedout") ? 1 : 0);
-                    values.put(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY, book.getInt("checkedoutby"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH, book.getInt("checkoutdatemonth"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY,   book.getInt("checkoutdateday"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR,  book.getInt("checkoutdateyear"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_DUE_MONTH,      book.getInt("duedatemonth"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_DUE_DAY,        book.getInt("duedateday"));
-                    values.put(DatabaseContract.Books.COLUMN_NAME_DUE_YEAR,       book.getInt("duedateyear"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT,    book.getBoolean("checkedout") ? 1 : 0);
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY, book.getInt("checkedoutby"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH, book.getInt("checkoutdatemonth"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY,   book.getInt("checkoutdateday"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR,  book.getInt("checkoutdateyear"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH,      book.getInt("duedatemonth"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY,        book.getInt("duedateday"));
+                    values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR,       book.getInt("duedateyear"));
                 }
 
-                db.insert(DatabaseContract.Books.TABLE_NAME, null, values);
+                db.insert(LibraryDatabaseContract.Books.TABLE_NAME, null, values);
             }
             catch (JSONException e) {
                 Log.e("JSON EXCEPTION", e.getMessage());
@@ -192,20 +192,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         final String[] projection = {
-                DatabaseContract.Members._ID,
-                DatabaseContract.Members.COLUMN_NAME_NAME,
-                DatabaseContract.Members.COLUMN_NAME_DOB_MONTH,
-                DatabaseContract.Members.COLUMN_NAME_DOB_DAY,
-                DatabaseContract.Members.COLUMN_NAME_DOB_YEAR,
-                DatabaseContract.Members.COLUMN_NAME_CITY,
-                DatabaseContract.Members.COLUMN_NAME_STATE
+                LibraryDatabaseContract.Members._ID,
+                LibraryDatabaseContract.Members.COLUMN_NAME_NAME,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_MONTH,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_DAY,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_YEAR,
+                LibraryDatabaseContract.Members.COLUMN_NAME_CITY,
+                LibraryDatabaseContract.Members.COLUMN_NAME_STATE
         };
 
-        final String selection = DatabaseContract.Members.COLUMN_NAME_NAME + "=?";
+        final String selection = LibraryDatabaseContract.Members.COLUMN_NAME_NAME + "=?";
 
         final String[] selectionArgs = { name };
 
-        Cursor cursor = db.query(DatabaseContract.Members.TABLE_NAME,
+        Cursor cursor = db.query(LibraryDatabaseContract.Members.TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,
@@ -230,20 +230,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         final String[] projection = {
-                DatabaseContract.Books._ID,
-                DatabaseContract.Books.COLUMN_NAME_TITLE,
-                DatabaseContract.Books.COLUMN_NAME_AUTHOR,
-                DatabaseContract.Books.COLUMN_NAME_ISBN,
-                DatabaseContract.Books.COLUMN_NAME_ISBN13,
-                DatabaseContract.Books.COLUMN_NAME_PUBLISHER,
-                DatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR
+                LibraryDatabaseContract.Books._ID,
+                LibraryDatabaseContract.Books.COLUMN_NAME_TITLE,
+                LibraryDatabaseContract.Books.COLUMN_NAME_AUTHOR,
+                LibraryDatabaseContract.Books.COLUMN_NAME_ISBN,
+                LibraryDatabaseContract.Books.COLUMN_NAME_ISBN13,
+                LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISHER,
+                LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR
         };
 
-        final String selection = DatabaseContract.Books.COLUMN_NAME_ISBN + "=?";
+        final String selection = LibraryDatabaseContract.Books.COLUMN_NAME_ISBN + "=?";
 
         final String[] selectionArgs = { isbn };
 
-        Cursor cursor = db.query(DatabaseContract.Books.TABLE_NAME,
+        Cursor cursor = db.query(LibraryDatabaseContract.Books.TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,
@@ -271,21 +271,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         final String query =
-                "SELECT b." + DatabaseContract.Books.COLUMN_NAME_TITLE +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_AUTHOR +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_DUE_MONTH +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_DUE_DAY +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_DUE_YEAR +
-                        " FROM " + DatabaseContract.Members.TABLE_NAME + " m" +
-                        " JOIN " + DatabaseContract.Books.TABLE_NAME + " b" +
-                        " ON m." + DatabaseContract.Members._ID + "=b." + DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY +
-                        " WHERE m." + DatabaseContract.Members.COLUMN_NAME_NAME + "=?" +
-                        " ORDER BY b." + DatabaseContract.Books.COLUMN_NAME_DUE_YEAR + " ASC" +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_DUE_MONTH + " ASC" +
-                        ", b." + DatabaseContract.Books.COLUMN_NAME_DUE_DAY + " ASC";
+                "SELECT b." + LibraryDatabaseContract.Books.COLUMN_NAME_TITLE +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_AUTHOR +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR +
+                        " FROM " + LibraryDatabaseContract.Members.TABLE_NAME + " m" +
+                        " JOIN " + LibraryDatabaseContract.Books.TABLE_NAME + " b" +
+                        " ON m." + LibraryDatabaseContract.Members._ID + "=b." + LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY +
+                        " WHERE m." + LibraryDatabaseContract.Members.COLUMN_NAME_NAME + "=?" +
+                        " ORDER BY b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR + " ASC" +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH + " ASC" +
+                        ", b." + LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY + " ASC";
 
         final String[] selectionArgs = { name };
 
@@ -311,23 +311,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT, 1);
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY, memberId);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT, 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY, memberId);
 
         Calendar calendar = Calendar.getInstance();
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR,  calendar.get(Calendar.YEAR));
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH, calendar.get(Calendar.MONTH) + 1);
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY,   calendar.get(Calendar.DATE));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR,  calendar.get(Calendar.YEAR));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH, calendar.get(Calendar.MONTH) + 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY,   calendar.get(Calendar.DATE));
 
         calendar.add(Calendar.DATE, 14);
-        values.put(DatabaseContract.Books.COLUMN_NAME_DUE_YEAR,  calendar.get(Calendar.YEAR));
-        values.put(DatabaseContract.Books.COLUMN_NAME_DUE_MONTH, calendar.get(Calendar.MONTH) + 1);
-        values.put(DatabaseContract.Books.COLUMN_NAME_DUE_DAY,   calendar.get(Calendar.DATE));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR,  calendar.get(Calendar.YEAR));
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH, calendar.get(Calendar.MONTH) + 1);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY,   calendar.get(Calendar.DATE));
 
-        final String where = DatabaseContract.Books._ID + "=?";
+        final String where = LibraryDatabaseContract.Books._ID + "=?";
         final String[] whereArgs = { String.valueOf(bookId) };
 
-        db.update(DatabaseContract.Books.TABLE_NAME, values, where, whereArgs);
+        db.update(LibraryDatabaseContract.Books.TABLE_NAME, values, where, whereArgs);
         db.close();
     }
 
@@ -337,19 +337,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT, 0);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_DUE_YEAR);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_DUE_MONTH);
-        values.putNull(DatabaseContract.Books.COLUMN_NAME_DUE_DAY);
+        values.put(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT, 0);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_YEAR);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_MONTH);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_CHECKOUT_DAY);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH);
+        values.putNull(LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY);
 
-        final String where = DatabaseContract.Books._ID + "=?";
+        final String where = LibraryDatabaseContract.Books._ID + "=?";
         final String[] whereArgs = { String.valueOf(bookId) };
 
-        db.update(DatabaseContract.Books.TABLE_NAME, values, where, whereArgs);
+        db.update(LibraryDatabaseContract.Books.TABLE_NAME, values, where, whereArgs);
         db.close();
 
         return isLate;
@@ -359,20 +359,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         final String[] projection = {
-                DatabaseContract.Books.COLUMN_NAME_DUE_YEAR,
-                DatabaseContract.Books.COLUMN_NAME_DUE_MONTH,
-                DatabaseContract.Books.COLUMN_NAME_DUE_DAY
+                LibraryDatabaseContract.Books.COLUMN_NAME_DUE_YEAR,
+                LibraryDatabaseContract.Books.COLUMN_NAME_DUE_MONTH,
+                LibraryDatabaseContract.Books.COLUMN_NAME_DUE_DAY
         };
 
-        final String selection = DatabaseContract.Books._ID + "=? AND " +
-                DatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY + "=?";
+        final String selection = LibraryDatabaseContract.Books._ID + "=? AND " +
+                LibraryDatabaseContract.Books.COLUMN_NAME_CHECKED_OUT_BY + "=?";
 
         final String[] selectionArgs = {
                 String.valueOf(bookId),
                 String.valueOf(memberId)
         };
 
-        Cursor cursor = db.query(DatabaseContract.Books.TABLE_NAME,
+        Cursor cursor = db.query(LibraryDatabaseContract.Books.TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,

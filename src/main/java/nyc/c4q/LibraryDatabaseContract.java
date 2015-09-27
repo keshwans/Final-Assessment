@@ -5,8 +5,8 @@ import android.provider.BaseColumns;
 /**
  * Created by robert on 9/26/15.
  */
-public final class DatabaseContract {
-    private DatabaseContract() {}
+public final class LibraryDatabaseContract {
+    private LibraryDatabaseContract() {}
 
     // Members table
     public static abstract class Members implements BaseColumns {
