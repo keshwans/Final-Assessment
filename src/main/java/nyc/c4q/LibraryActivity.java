@@ -12,6 +12,8 @@ public class LibraryActivity extends Activity {
     public EditText inputParameter;
     public TextView textDisplay;
 
+    LibrarySQLiteOpenHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,9 @@ public class LibraryActivity extends Activity {
 
         inputParameter = (EditText) findViewById(R.id.input_parameter);
         textDisplay = (TextView) findViewById(R.id.text_display);
+
+        dbHelper = LibrarySQLiteOpenHelper.getInstance(getApplicationContext());
+
     }
 
     public void checkOut(int memberId, int bookId) {
