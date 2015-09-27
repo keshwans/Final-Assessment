@@ -3,44 +3,35 @@ package nyc.c4q.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "members")
 public class Member {
 
     @SerializedName("id")
     @Expose
-    @DatabaseField(id = true)
-    private Long id;
+    private Integer id;
 
     @SerializedName("name")
     @Expose
-    @DatabaseField
     private String name;
 
     @SerializedName("dob_month")
     @Expose
-    @DatabaseField
-    private Long dobMonth;
+    private Integer dobMonth;
 
     @SerializedName("dob_day")
     @Expose
-    private Long dobDay;
+    private Integer dobDay;
 
     @SerializedName("dob_year")
     @Expose
-    @DatabaseField
-    private Long dobYear;
+    private Integer dobYear;
 
     @SerializedName("city")
     @Expose
-    @DatabaseField
     private String city;
 
     @SerializedName("state")
     @Expose
-    @DatabaseField
     private String state;
 
     /**
@@ -48,7 +39,7 @@ public class Member {
      * @return
      *     The id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -57,7 +48,7 @@ public class Member {
      * @param id
      *     The id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -84,7 +75,7 @@ public class Member {
      * @return
      *     The dobMonth
      */
-    public Long getDobMonth() {
+    public Integer getDobMonth() {
         return dobMonth;
     }
 
@@ -93,7 +84,7 @@ public class Member {
      * @param dobMonth
      *     The dob_month
      */
-    public void setDobMonth(Long dobMonth) {
+    public void setDobMonth(Integer dobMonth) {
         this.dobMonth = dobMonth;
     }
 
@@ -102,7 +93,7 @@ public class Member {
      * @return
      *     The dobDay
      */
-    public Long getDobDay() {
+    public Integer getDobDay() {
         return dobDay;
     }
 
@@ -111,7 +102,7 @@ public class Member {
      * @param dobDay
      *     The dob_day
      */
-    public void setDobDay(Long dobDay) {
+    public void setDobDay(Integer dobDay) {
         this.dobDay = dobDay;
     }
 
@@ -120,7 +111,7 @@ public class Member {
      * @return
      *     The dobYear
      */
-    public Long getDobYear() {
+    public Integer getDobYear() {
         return dobYear;
     }
 
@@ -129,7 +120,7 @@ public class Member {
      * @param dobYear
      *     The dob_year
      */
-    public void setDobYear(Long dobYear) {
+    public void setDobYear(Integer dobYear) {
         this.dobYear = dobYear;
     }
 

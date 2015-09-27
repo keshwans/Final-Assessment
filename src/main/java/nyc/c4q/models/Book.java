@@ -3,92 +3,75 @@ package nyc.c4q.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "books")
 public class Book {
 
     @SerializedName("id")
     @Expose
-    @DatabaseField(id = true)
-    private Long id;
+    private Integer id;
 
     @SerializedName("title")
     @Expose
-    @DatabaseField
     private String title;
 
     @SerializedName("author")
     @Expose
-    @DatabaseField
     private String author;
 
     @SerializedName("isbn")
     @Expose
-    @DatabaseField
     private String isbn;
 
     @SerializedName("isbn13")
     @Expose
-    @DatabaseField
     private String isbn13;
 
     @SerializedName("publisher")
     @Expose
-    @DatabaseField
     private String publisher;
 
     @SerializedName("publishyear")
     @Expose
-    @DatabaseField
-    private Long publishyear;
+    private Integer publishYear;
 
     @SerializedName("checkedout")
     @Expose
-    @DatabaseField
-    private Boolean checkedout;
+    private Boolean checkedOut;
 
     @SerializedName("checkedoutby")
     @Expose
-    @DatabaseField
-    private Long checkedoutby;
+    private Integer checkedoutBy;
 
     @SerializedName("checkoutdateyear")
     @Expose
-    @DatabaseField
-    private Long checkoutdateyear;
+    private Integer checkoutdateYear;
 
     @SerializedName("checkoutdatemonth")
     @Expose
-    private Long checkoutdatemonth;
+    private Integer checkoutdateMonth;
 
     @SerializedName("checkoutdateday")
     @Expose
-    @DatabaseField
-    private Long checkoutdateday;
+    private Integer checkoutdateDay;
 
     @SerializedName("duedateyear")
     @Expose
-    @DatabaseField
-    private Long duedateyear;
+    private Integer duedateYear;
 
-    @SerializedName("duedatemonth")
+    @SerializedName("duedateMonth")
     @Expose
-    @DatabaseField
-    private Long duedatemonth;
+    private Integer duedateMonth;
 
-    @SerializedName("duedateday")
+    @SerializedName("duedateDay")
     @Expose
-    @DatabaseField
-    private Long duedateday;
+    private Integer duedateDay;
 
     /**
      * 
      * @return
      *     The id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -97,7 +80,7 @@ public class Book {
      * @param id
      *     The id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -194,163 +177,163 @@ public class Book {
     /**
      * 
      * @return
-     *     The publishyear
+     *     The publishYear
      */
-    public Long getPublishyear() {
-        return publishyear;
+    public Integer getPublishYear() {
+        return publishYear;
     }
 
     /**
      * 
-     * @param publishyear
-     *     The publishyear
+     * @param publishYear
+     *     The publishYear
      */
-    public void setPublishyear(Long publishyear) {
-        this.publishyear = publishyear;
-    }
-
-    /**
-     * 
-     * @return
-     *     The checkedout
-     */
-    public Boolean getCheckedout() {
-        return checkedout;
-    }
-
-    /**
-     * 
-     * @param checkedout
-     *     The checkedout
-     */
-    public void setCheckedout(Boolean checkedout) {
-        this.checkedout = checkedout;
+    public void setPublishYear(Integer publishYear) {
+        this.publishYear = publishYear;
     }
 
     /**
      * 
      * @return
-     *     The checkedoutby
+     *     The checkedOut
      */
-    public Long getCheckedoutby() {
-        return checkedoutby;
+    public Boolean getCheckedOut() {
+        return checkedOut;
     }
 
     /**
      * 
-     * @param checkedoutby
-     *     The checkedoutby
+     * @param checkedOut
+     *     The checkedOut
      */
-    public void setCheckedoutby(Long checkedoutby) {
-        this.checkedoutby = checkedoutby;
-    }
-
-    /**
-     * 
-     * @return
-     *     The checkoutdateyear
-     */
-    public Long getCheckoutdateyear() {
-        return checkoutdateyear;
-    }
-
-    /**
-     * 
-     * @param checkoutdateyear
-     *     The checkoutdateyear
-     */
-    public void setCheckoutdateyear(Long checkoutdateyear) {
-        this.checkoutdateyear = checkoutdateyear;
+    public void setCheckedOut(Boolean checkedOut) {
+        this.checkedOut = checkedOut;
     }
 
     /**
      * 
      * @return
-     *     The checkoutdatemonth
+     *     The checkedoutBy
      */
-    public Long getCheckoutdatemonth() {
-        return checkoutdatemonth;
+    public Integer getCheckedoutBy() {
+        return checkedoutBy;
     }
 
     /**
      * 
-     * @param checkoutdatemonth
-     *     The checkoutdatemonth
+     * @param checkedoutBy
+     *     The checkedoutBy
      */
-    public void setCheckoutdatemonth(Long checkoutdatemonth) {
-        this.checkoutdatemonth = checkoutdatemonth;
-    }
-
-    /**
-     * 
-     * @return
-     *     The checkoutdateday
-     */
-    public Long getCheckoutdateday() {
-        return checkoutdateday;
-    }
-
-    /**
-     * 
-     * @param checkoutdateday
-     *     The checkoutdateday
-     */
-    public void setCheckoutdateday(Long checkoutdateday) {
-        this.checkoutdateday = checkoutdateday;
+    public void setCheckedoutBy(Integer checkedoutBy) {
+        this.checkedoutBy = checkedoutBy;
     }
 
     /**
      * 
      * @return
-     *     The duedateyear
+     *     The checkoutdateYear
      */
-    public Long getDuedateyear() {
-        return duedateyear;
+    public Integer getCheckoutdateYear() {
+        return checkoutdateYear;
     }
 
     /**
      * 
-     * @param duedateyear
-     *     The duedateyear
+     * @param checkoutdateYear
+     *     The checkoutdateYear
      */
-    public void setDuedateyear(Long duedateyear) {
-        this.duedateyear = duedateyear;
-    }
-
-    /**
-     * 
-     * @return
-     *     The duedatemonth
-     */
-    public Long getDuedatemonth() {
-        return duedatemonth;
-    }
-
-    /**
-     * 
-     * @param duedatemonth
-     *     The duedatemonth
-     */
-    public void setDuedatemonth(Long duedatemonth) {
-        this.duedatemonth = duedatemonth;
+    public void setCheckoutdateYear(Integer checkoutdateYear) {
+        this.checkoutdateYear = checkoutdateYear;
     }
 
     /**
      * 
      * @return
-     *     The duedateday
+     *     The checkoutdateMonth
      */
-    public Long getDuedateday() {
-        return duedateday;
+    public Integer getCheckoutdateMonth() {
+        return checkoutdateMonth;
     }
 
     /**
      * 
-     * @param duedateday
-     *     The duedateday
+     * @param checkoutdateMonth
+     *     The checkoutdateMonth
      */
-    public void setDuedateday(Long duedateday) {
-        this.duedateday = duedateday;
+    public void setCheckoutdateMonth(Integer checkoutdateMonth) {
+        this.checkoutdateMonth = checkoutdateMonth;
+    }
+
+    /**
+     * 
+     * @return
+     *     The checkoutdateDay
+     */
+    public Integer getCheckoutdateDay() {
+        return checkoutdateDay;
+    }
+
+    /**
+     * 
+     * @param checkoutdateDay
+     *     The checkoutdateDay
+     */
+    public void setCheckoutdateDay(Integer checkoutdateDay) {
+        this.checkoutdateDay = checkoutdateDay;
+    }
+
+    /**
+     * 
+     * @return
+     *     The duedateYear
+     */
+    public Integer getDuedateYear() {
+        return duedateYear;
+    }
+
+    /**
+     * 
+     * @param duedateYear
+     *     The duedateYear
+     */
+    public void setDuedateYear(Integer duedateYear) {
+        this.duedateYear = duedateYear;
+    }
+
+    /**
+     * 
+     * @return
+     *     The duedateMonth
+     */
+    public Integer getDuedateMonth() {
+        return duedateMonth;
+    }
+
+    /**
+     * 
+     * @param duedateMonth
+     *     The duedateMonth
+     */
+    public void setDuedateMonth(Integer duedateMonth) {
+        this.duedateMonth = duedateMonth;
+    }
+
+    /**
+     * 
+     * @return
+     *     The duedateDay
+     */
+    public Integer getDuedateDay() {
+        return duedateDay;
+    }
+
+    /**
+     * 
+     * @param duedateDay
+     *     The duedateDay
+     */
+    public void setDuedateDay(Integer duedateDay) {
+        this.duedateDay = duedateDay;
     }
 
 }
