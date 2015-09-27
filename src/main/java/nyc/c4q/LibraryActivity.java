@@ -24,6 +24,10 @@ public class LibraryActivity extends Activity {
 
         dbHelper = LibrarySQLiteOpenHelper.getInstance(getApplicationContext());
 
+        if (!dbHelper.hasData()) {
+            dbHelper.populateData();
+        }
+
     }
 
     public void checkOut(int memberId, int bookId) {
