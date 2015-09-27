@@ -230,5 +230,44 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public String getBook(String isbn) {
+        SQLiteDatabase db = getReadableDatabase();
 
+        final String[] projection = {
+                LibraryDatabaseContract.Books._ID,
+                LibraryDatabaseContract.Books.COLUMN_NAME_TITLE,
+                LibraryDatabaseContract.Books.COLUMN_NAME_AUTHOR,
+                LibraryDatabaseContract.Books.COLUMN_NAME_ISBN,
+                LibraryDatabaseContract.Books.COLUMN_NAME_ISBN13,
+                LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISHER,
+                LibraryDatabaseContract.Books.COLUMN_NAME_PUBLISH_YEAR
+        };
+
+        final String selection = LibraryDatabaseContract.Books.COLUMN_NAME_ISBN + "=?";
+
+        final String[] selectionArgs = { isbn };
+
+        Cursor cursor = db.query(LibraryDatabaseContract.Books.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() < 1) { return null; }
+
+        cursor.moveToFirst();
+        String result =
+                "id: " + cursor.getInt(0) + "\n" +
+                        "title: " + cursor.getString(1) + "\n" +
+                        "author: " + cursor.getString(2) + "\n" +
+                        "isbn: " + cursor.getString(3) + "\n" +
+                        "isbn13: " + cursor.getString(4) + "\n" +
+                        "publisher: " + cursor.getString(5) + "\n" +
+                        "publication year: " + cursor.getInt(6);
+
+        db.close();
+        return result;
+    }
 }

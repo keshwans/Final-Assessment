@@ -57,6 +57,9 @@ public class LibraryActivity extends Activity {
         String isbn = inputParameter.getText().toString();
 
         // TODO Display book information for the book with the given ISBN.
+        String bookInfo = dbHelper.getBook(isbn);
+        textDisplay.setText(bookInfo);
+
     }
 
     public void button_getCheckedOut_onClick(View view) {
