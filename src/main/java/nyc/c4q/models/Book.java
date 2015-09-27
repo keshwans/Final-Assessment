@@ -9,6 +9,38 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "books")
 public class Book {
 
+    public Book() {
+
+    }
+
+    public Book(Integer id, String title, String author, String isbn, String isbn13, String publisher, Integer publishYear, Boolean checkedOut, Integer checkedoutBy, Integer checkoutdateYear, Integer checkoutdateMonth, Integer checkoutdateDay, Integer duedateYear, Integer duedateMonth, Integer duedateDay) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.isbn13 = isbn13;
+        this.publisher = publisher;
+        this.publishYear = publishYear;
+        this.checkedOut = checkedOut;
+        this.checkedoutBy = checkedoutBy;
+        this.checkoutdateYear = checkoutdateYear;
+        this.checkoutdateMonth = checkoutdateMonth;
+        this.checkoutdateDay = checkoutdateDay;
+        this.duedateYear = duedateYear;
+        this.duedateMonth = duedateMonth;
+        this.duedateDay = duedateDay;
+    }
+
+    public Book(Integer id, String title, String author, String isbn, String isbn13, String publisher, Integer publishYear) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.isbn13 = isbn13;
+        this.publisher = publisher;
+        this.publishYear = publishYear;
+    }
+
     @SerializedName("id")
     @Expose
     @DatabaseField(id = true)
@@ -74,12 +106,12 @@ public class Book {
     @DatabaseField
     private Integer duedateYear;
 
-    @SerializedName("duedateMonth")
+    @SerializedName("duedatemonth")
     @Expose
     @DatabaseField
     private Integer duedateMonth;
 
-    @SerializedName("duedateDay")
+    @SerializedName("duedateday")
     @Expose
     @DatabaseField
     private Integer duedateDay;
