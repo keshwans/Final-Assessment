@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class LibraryActivity extends Activity {
 
-    public EditText inputParameter;
     private LibraryDatabaseHelper dbHelper;
+
+    public EditText inputParameter;
+    public TextView textDisplay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,7 @@ public class LibraryActivity extends Activity {
         setContentView(R.layout.activity_library);
 
         inputParameter = (EditText) findViewById(R.id.input_parameter);
+        textDisplay = (TextView) findViewById(R.id.text_display);
 
         dbHelper = new LibraryDatabaseHelper(getApplicationContext(), getResources(), getPackageName());
         if (!dbHelper.hasData()) {
@@ -43,6 +48,9 @@ public class LibraryActivity extends Activity {
         String name = inputParameter.getText().toString();
 
         // TODO Display member information for the member with the given name.
+        String memberInfo = dbHelper.getMember(name);
+        textDisplay.setText(memberInfo);
+
     }
 
     public void button_getBook_onClick(View view) {

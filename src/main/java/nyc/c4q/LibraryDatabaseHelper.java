@@ -191,5 +191,44 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         return jsonArray;
     }
 
+    /* CRUD methods for tables */
+    public String getMember(String name) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        final String[] projection = {
+                LibraryDatabaseContract.Members._ID,
+                LibraryDatabaseContract.Members.COLUMN_NAME_NAME,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_MONTH,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_DAY,
+                LibraryDatabaseContract.Members.COLUMN_NAME_DOB_YEAR,
+                LibraryDatabaseContract.Members.COLUMN_NAME_CITY,
+                LibraryDatabaseContract.Members.COLUMN_NAME_STATE
+        };
+
+        final String selection = LibraryDatabaseContract.Members.COLUMN_NAME_NAME + "=?";
+
+        final String[] selectionArgs = { name };
+
+        Cursor cursor = db.query(LibraryDatabaseContract.Members.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() < 1) { return null; }
+
+        cursor.moveToFirst();
+        String result =
+                "id: " + cursor.getInt(0) + "\n" +
+                        "name: " + cursor.getString(1) + "\n" +
+                        "dob: " + cursor.getInt(2) + "/" + cursor.getInt(3) + "/" + cursor.getInt(4) + "\n" +
+                        "location: " + cursor.getString(5) + ", " + cursor.getString(6);
+
+        db.close();
+        return result;
+    }
+
 
 }
