@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class LibraryActivity extends Activity {
 
     public EditText inputParameter;
+    public TextView textDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +18,7 @@ public class LibraryActivity extends Activity {
         setContentView(R.layout.activity_library);
 
         inputParameter = (EditText) findViewById(R.id.input_parameter);
+        textDisplay = (TextView) findViewById(R.id.text_display);
     }
 
     public void checkOut(int memberId, int bookId) {
