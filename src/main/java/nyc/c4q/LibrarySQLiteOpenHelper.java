@@ -27,7 +27,7 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
     public static final String TAG = LibrarySQLiteOpenHelper.class.getSimpleName();
 
     public static final String DATABASE_NAME = "library_orm.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     private static LibrarySQLiteOpenHelper mDBHelper;
     private Context mContext;
@@ -187,14 +187,14 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
     public Member loadMemberData(String name) throws SQLException, java.sql.SQLException {
         return getDao(Member.class)
                 .queryBuilder()
-                .where().eq("name", name)
+                .where().eq(Member.COLUMN_NAME_NAME, name)
                 .queryForFirst();
     }
 
     public Book loadBookData(String isbn) throws SQLException, java.sql.SQLException {
         return getDao(Book.class)
                 .queryBuilder()
-                .where().eq("isbn", isbn)
+                .where().eq(Book.COLUMN_NAME_ISBN, isbn)
                 .queryForFirst();
     }
 
@@ -203,7 +203,7 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
         Dao<Member, Integer> memberDao = getDao(Member.class);
         QueryBuilder<Book, Integer> bookQb = bookDao.queryBuilder();
         QueryBuilder<Member, Integer> memberQb = memberDao.queryBuilder();
-        memberQb.where().ge("name", name);
+        memberQb.where().ge(Member.COLUMN_NAME_NAME, name);
         // join with the order query
         List<Book> results = bookQb.join(memberQb).query();
         StringBuilder sb = new StringBuilder("name: " + name);
@@ -220,11 +220,18 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
     }
 
     public List<Book> loadCheckedOutBooks(String name) throws java.sql.SQLException {
-        Member member = getDao(Member.class).queryBuilder().where().eq("name", name).queryForFirst();
+        Member member = getDao(Member.class).queryBuilder()
+                .where()
+                .eq(Member.COLUMN_NAME_NAME, name)
+                .queryForFirst();
+
         int memberId = member.getId();
 
-
-        return getDao(Book.class).queryBuilder().where().eq("checkedout", true).and().eq("checkedoutby", memberId).query();
+        return getDao(Book.class).
+                queryBuilder().
+                where().eq(Book.COLUMN_NAME_CHECKED_OUT, true)
+                .and().eq(Book.COLUMN_NAME_CHECKED_OUT_BY, memberId)
+                .query();
     }
 
     public void checkout(final Integer memberId, final Integer bookId) throws java.sql.SQLException {
@@ -241,18 +248,18 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 
         UpdateBuilder<Book, Integer> updateBuilder = (UpdateBuilder<Book, Integer>) getDao(Book.class).updateBuilder();
 
-        updateBuilder.updateColumnValue("checkoutdateYear", year);
-        updateBuilder.updateColumnValue("checkoutdateMonth", month);
-        updateBuilder.updateColumnValue("checkoutdateDay", day);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_YEAR, year);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_MONTH, month);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_DAY, day);
 
-        updateBuilder.updateColumnValue("duedateYear", dueYear);
-        updateBuilder.updateColumnValue("duedateMonth", dueMonth);
-        updateBuilder.updateColumnValue("duedateDay", dueDay);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_YEAR, dueYear);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_MONTH, dueMonth);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_DAY, dueDay);
 
-        updateBuilder.updateColumnValue("checkedoutBy", memberId);
-        updateBuilder.updateColumnValue("checkedOut", true);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKED_OUT_BY, memberId);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKED_OUT, true);
 
-        updateBuilder.where().eq("id", bookId);
+        updateBuilder.where().eq(Book.COLUMN_NAME_ID, bookId);
         updateBuilder.update();
     }
 
@@ -261,18 +268,19 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
 
         UpdateBuilder<Book, Integer> updateBuilder = (UpdateBuilder<Book, Integer>) getDao(Book.class).updateBuilder();
 
-        updateBuilder.updateColumnValue("checkoutdateYear", null);
-        updateBuilder.updateColumnValue("checkoutdateMonth", null);
-        updateBuilder.updateColumnValue("checkoutdateDay", null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_YEAR, null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_MONTH, null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKOUT_DAY, null);
 
-        updateBuilder.updateColumnValue("duedateYear", null);
-        updateBuilder.updateColumnValue("duedateMonth", null);
-        updateBuilder.updateColumnValue("duedateDay", null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_YEAR, null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_MONTH, null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_DUE_DAY, null);
 
-        updateBuilder.updateColumnValue("checkedoutBy", null);
-        updateBuilder.updateColumnValue("checkedOut", false);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKED_OUT_BY, null);
+        updateBuilder.updateColumnValue(Book.COLUMN_NAME_CHECKED_OUT, false);
 
-        updateBuilder.where().eq("id", bookId);
+
+        updateBuilder.where().eq(Book.COLUMN_NAME_ID, bookId);
         updateBuilder.update();
     }
 }
