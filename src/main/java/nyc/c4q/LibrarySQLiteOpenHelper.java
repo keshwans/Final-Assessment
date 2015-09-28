@@ -8,10 +8,14 @@ import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import nyc.c4q.models.Book;
 import nyc.c4q.models.Member;
@@ -73,11 +77,13 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
        json files for each table (members and books) is included in res/raw folder */
 
     public boolean hasData() {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM BOOKS", null);
-        cursor.moveToFirst();
-        int count = cursor.getInt(0);
-        return count > 0;
+        try {
+            Dao<Book, Integer> bookDao = getDao(Book.class);
+            return (bookDao.countOf() > 0);
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void populateData() {
@@ -192,5 +198,82 @@ public class LibrarySQLiteOpenHelper extends OrmLiteSqliteOpenHelper {
                 .queryForFirst();
     }
 
+    public String loadCheckedBooks(String name) throws SQLException, java.sql.SQLException {
+        Dao<Book, Integer> bookDao = getDao(Book.class);
+        Dao<Member, Integer> memberDao = getDao(Member.class);
+        QueryBuilder<Book, Integer> bookQb = bookDao.queryBuilder();
+        QueryBuilder<Member, Integer> memberQb = memberDao.queryBuilder();
+        memberQb.where().ge("name", name);
+        // join with the order query
+        List<Book> results = bookQb.join(memberQb).query();
+        StringBuilder sb = new StringBuilder("name: " + name);
+        for (Book book : results) {
+            sb.append(
+                    "\n-----\n" +
+                            "title: " + book.getTitle() + "\n" +
+                            "author: " + book.getAuthor() + "\n" +
+                            "checkout date: " + book.getCheckoutdateMonth() + "/" + book.getCheckoutdateDay() + "/" + book.getCheckoutdateYear() + "\n" +
+                            "due date: " + book.getDuedateMonth() + "/" + book.getDuedateDay() + "/" + book.getDuedateYear()
+            );
+        }
+        return sb.toString();
+    }
+
+    public List<Book> loadCheckedOutBooks(String name) throws java.sql.SQLException {
+        Member member = getDao(Member.class).queryBuilder().where().eq("name", name).queryForFirst();
+        int memberId = member.getId();
+
+
+        return getDao(Book.class).queryBuilder().where().eq("checkedout", true).and().eq("checkedoutby", memberId).query();
+    }
+
+    public void checkout(final Integer memberId, final Integer bookId) throws java.sql.SQLException {
+
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1; // Note: zero based!
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        now.add(Calendar.DATE, 14);
+
+        int dueYear = now.get(Calendar.YEAR);
+        int dueMonth = now.get(Calendar.MONTH) + 1; // Note: zero based!
+        int dueDay = now.get(Calendar.DAY_OF_MONTH);
+
+        UpdateBuilder<Book, Integer> updateBuilder = (UpdateBuilder<Book, Integer>) getDao(Book.class).updateBuilder();
+
+        updateBuilder.updateColumnValue("checkoutdateYear", year);
+        updateBuilder.updateColumnValue("checkoutdateMonth", month);
+        updateBuilder.updateColumnValue("checkoutdateDay", day);
+
+        updateBuilder.updateColumnValue("duedateYear", dueYear);
+        updateBuilder.updateColumnValue("duedateMonth", dueMonth);
+        updateBuilder.updateColumnValue("duedateDay", dueDay);
+
+        updateBuilder.updateColumnValue("checkedoutBy", memberId);
+        updateBuilder.updateColumnValue("checkedOut", true);
+
+        updateBuilder.where().eq("id", bookId);
+        updateBuilder.update();
+    }
+
+
+    public void checkin(final Integer memberId, final Integer bookId) throws java.sql.SQLException {
+
+        UpdateBuilder<Book, Integer> updateBuilder = (UpdateBuilder<Book, Integer>) getDao(Book.class).updateBuilder();
+
+        updateBuilder.updateColumnValue("checkoutdateYear", null);
+        updateBuilder.updateColumnValue("checkoutdateMonth", null);
+        updateBuilder.updateColumnValue("checkoutdateDay", null);
+
+        updateBuilder.updateColumnValue("duedateYear", null);
+        updateBuilder.updateColumnValue("duedateMonth", null);
+        updateBuilder.updateColumnValue("duedateDay", null);
+
+        updateBuilder.updateColumnValue("checkedoutBy", null);
+        updateBuilder.updateColumnValue("checkedOut", false);
+
+        updateBuilder.where().eq("id", bookId);
+        updateBuilder.update();
+    }
 }
 
