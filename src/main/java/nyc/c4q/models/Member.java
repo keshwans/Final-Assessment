@@ -9,6 +9,13 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "members")
 public class Member {
 
+    public static final String COLUMN_NAME_NAME      = "name";
+    public static final String COLUMN_NAME_DOB_MONTH = "dob_month";
+    public static final String COLUMN_NAME_DOB_DAY   = "dob_day";
+    public static final String COLUMN_NAME_DOB_YEAR  = "dob_year";
+    public static final String COLUMN_NAME_CITY      = "city";
+    public static final String COLUMN_NAME_STATE     = "state";
+
     @SerializedName("id")
     @Expose
     @DatabaseField(id = true)
@@ -16,32 +23,32 @@ public class Member {
 
     @SerializedName("name")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_NAME)
     private String name;
 
     @SerializedName("dob_month")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_DOB_MONTH)
     private Integer dobMonth;
 
     @SerializedName("dob_day")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_DOB_DAY)
     private Integer dobDay;
 
     @SerializedName("dob_year")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_DOB_YEAR)
     private Integer dobYear;
 
     @SerializedName("city")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_CITY)
     private String city;
 
     @SerializedName("state")
     @Expose
-    @DatabaseField
+    @DatabaseField (columnName = COLUMN_NAME_STATE)
     private String state;
 
     /**

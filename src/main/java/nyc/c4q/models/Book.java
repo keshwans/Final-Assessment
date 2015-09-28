@@ -9,6 +9,23 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "books")
 public class Book {
 
+    public static final String COLUMN_NAME_ID             = "id";
+    public static final String COLUMN_NAME_TITLE          = "title";
+    public static final String COLUMN_NAME_AUTHOR         = "author";
+    public static final String COLUMN_NAME_ISBN           = "isbn";
+    public static final String COLUMN_NAME_ISBN13         = "isbn13";
+    public static final String COLUMN_NAME_PUBLISHER      = "publisher";
+    public static final String COLUMN_NAME_PUBLISH_YEAR   = "publish_year";
+    public static final String COLUMN_NAME_CHECKED_OUT    = "checked_out";
+    public static final String COLUMN_NAME_CHECKED_OUT_BY = "co_by";
+    public static final String COLUMN_NAME_CHECKOUT_MONTH = "co_month";
+    public static final String COLUMN_NAME_CHECKOUT_DAY   = "co_day";
+    public static final String COLUMN_NAME_CHECKOUT_YEAR  = "co_year";
+    public static final String COLUMN_NAME_DUE_MONTH      = "due_month";
+    public static final String COLUMN_NAME_DUE_DAY        = "due_day";
+    public static final String COLUMN_NAME_DUE_YEAR       = "due_year";
+
+
     public Book() {
 
     }
@@ -43,77 +60,77 @@ public class Book {
 
     @SerializedName("id")
     @Expose
-    @DatabaseField(id = true)
+    @DatabaseField(columnName = COLUMN_NAME_ID,  id = true)
     private Integer id;
 
     @SerializedName("title")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_TITLE)
     private String title;
 
     @SerializedName("author")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_AUTHOR)
     private String author;
 
     @SerializedName("isbn")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_ISBN)
     private String isbn;
 
     @SerializedName("isbn13")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_ISBN13)
     private String isbn13;
 
     @SerializedName("publisher")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_PUBLISHER)
     private String publisher;
 
     @SerializedName("publishyear")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_PUBLISH_YEAR)
     private Integer publishYear;
 
     @SerializedName("checkedout")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_CHECKED_OUT)
     private Boolean checkedOut;
 
     @SerializedName("checkedoutby")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_CHECKED_OUT_BY)
     private Integer checkedoutBy;
 
     @SerializedName("checkoutdateyear")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_CHECKOUT_YEAR)
     private Integer checkoutdateYear;
 
     @SerializedName("checkoutdatemonth")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_CHECKOUT_MONTH)
     private Integer checkoutdateMonth;
 
     @SerializedName("checkoutdateday")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_CHECKOUT_DAY)
     private Integer checkoutdateDay;
 
     @SerializedName("duedateyear")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_DUE_YEAR)
     private Integer duedateYear;
 
     @SerializedName("duedatemonth")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_DUE_MONTH)
     private Integer duedateMonth;
 
     @SerializedName("duedateday")
     @Expose
-    @DatabaseField
+    @DatabaseField(columnName = COLUMN_NAME_DUE_DAY)
     private Integer duedateDay;
 
     /**
