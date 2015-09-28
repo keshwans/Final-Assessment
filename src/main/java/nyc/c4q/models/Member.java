@@ -9,6 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "members")
 public class Member {
 
+    public static final String COLUMN_NAME_ID        = "id";
     public static final String COLUMN_NAME_NAME      = "name";
     public static final String COLUMN_NAME_DOB_MONTH = "dob_month";
     public static final String COLUMN_NAME_DOB_DAY   = "dob_day";
@@ -52,7 +53,7 @@ public class Member {
     private String state;
 
     /**
-     * 
+     *
      * @return
      *     The id
      */
@@ -61,7 +62,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param id
      *     The id
      */
@@ -70,7 +71,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The name
      */
@@ -79,7 +80,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param name
      *     The name
      */
@@ -88,7 +89,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The dobMonth
      */
@@ -97,7 +98,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param dobMonth
      *     The dob_month
      */
@@ -106,7 +107,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The dobDay
      */
@@ -115,7 +116,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param dobDay
      *     The dob_day
      */
@@ -124,7 +125,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The dobYear
      */
@@ -133,7 +134,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param dobYear
      *     The dob_year
      */
@@ -142,7 +143,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The city
      */
@@ -151,7 +152,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param city
      *     The city
      */
@@ -160,7 +161,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @return
      *     The state
      */
@@ -169,7 +170,7 @@ public class Member {
     }
 
     /**
-     * 
+     *
      * @param state
      *     The state
      */
